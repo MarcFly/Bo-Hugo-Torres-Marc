@@ -6,7 +6,7 @@
 
 struct Bouncer {
 	PhysBody*	cpbody;
-	PhysBody*	bumperpbody;
+	PhysBody*	flipperpbody;
 	b2RevoluteJoint* joint;
 	bool		direction = false; //false is left, true is right
 

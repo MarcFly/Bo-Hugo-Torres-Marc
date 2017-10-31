@@ -20,9 +20,9 @@ bool ModulePlayer::Start()
 
 
 	//Create desired objects
-	bouncers[0].cpbody = App->physics-> App->physics->CreateCircle(170, 400, 5, b2_kinematicBody);
-	bouncers[0].bumperpbody = App->physics->CreateRectangle(200, 400, 100, 50,b2_dynamicBody);
-	bouncers[0].joint = App->physics->CreateRotJoint(bouncers[0].cpbody, bouncers[0].bumperpbody);
+	bouncers[0].cpbody = App->physics-> App->physics->CreateCircle(175, 400, 0.01f, b2_kinematicBody);
+	bouncers[0].flipperpbody = App->physics->CreateRectangle(200, 400, 50, 10,b2_dynamicBody);
+	bouncers[0].joint = App->physics->CreateRotJoint(bouncers[0].cpbody, bouncers[0].flipperpbody);
 
 	return true;
 }
@@ -42,13 +42,13 @@ update_status ModulePlayer::Update()
 	if ((App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN ) && bouncers[0].joint != nullptr)
 	{
 		
-		bouncers[0].bumperpbody->body->ApplyTorque(-2500.0f, true);
-		bouncers[0].joint->SetMotorSpeed(-100);
+		bouncers[0].flipperpbody->body->ApplyTorque(-100.0f, true);
+
 		
 	}
 	else if (bouncers[0].joint != nullptr)
 	{
-		bouncers[0].bumperpbody->body->ApplyTorque(1000.0f, true);
+		bouncers[0].flipperpbody->body->ApplyTorque(100.0f, true);
 
 	}
 

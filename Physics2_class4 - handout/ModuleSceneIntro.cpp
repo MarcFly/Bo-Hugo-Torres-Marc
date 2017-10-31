@@ -34,7 +34,7 @@ bool ModuleSceneIntro::Start()
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 	// Create Level collisions
-	{
+	
 		int pinball[108] = {
 			220, 659,
 			220, 650,
@@ -89,13 +89,13 @@ bool ModuleSceneIntro::Start()
 			0, 1,
 			371, 0,
 			370, 660,
-			226, 660
+			222, 660
 		};
 
-		App->physics->CreateChain(0, 0, pinball, 100, b2_staticBody);
-	}
-	{
-		int pinball[14] = {
+		stage.add(App->physics->CreateChain(0, 0, pinball, 108, b2_staticBody));
+	
+	
+		int pinballa[14] = {
 			47, 480,
 			40, 480,
 			40, 583,
@@ -105,10 +105,10 @@ bool ModuleSceneIntro::Start()
 			47, 481
 		};
 
-		App->physics->CreateChain(0, 0, pinball, 100, b2_staticBody);
-	}
-	{
-		int pinball[12] = {
+		stage.add(App->physics->CreateChain(0, 0, pinballa, 14, b2_staticBody));
+	
+	
+		int pinballb[12] = {
 			260, 551,
 			283, 545,
 			287, 541,
@@ -117,10 +117,10 @@ bool ModuleSceneIntro::Start()
 			260, 550
 		};
 
-		App->physics->CreateChain(0, 0, pinball, 100, b2_staticBody);
-	}
-	{
-		int pinball[60] = {
+		stage.add(App->physics->CreateChain(0, 0, pinballb, 12, b2_staticBody));
+	
+	
+		int pinballc[60] = {
 			88, 147,
 			101, 121,
 			122, 100,
@@ -150,13 +150,13 @@ bool ModuleSceneIntro::Start()
 			121, 108,
 			105, 125,
 			93, 150,
-			89, 148
+			89, 147
 		};
 
-		App->physics->CreateChain(0, 0, pinball, 100, b2_staticBody);
-	}
-	{
-		int pinball[34] = {
+		stage.add(App->physics->CreateChain(0, 0, pinballc, 60, b2_staticBody));
+	
+	
+		int pinballd[34] = {
 			111, 59,
 			114, 65,
 			92, 80,
@@ -173,11 +173,11 @@ bool ModuleSceneIntro::Start()
 			52, 127,
 			70, 96,
 			85, 78,
-			106, 62
+			111, 60
 		};
 
-		App->physics->CreateChain(0, 0, pinball, 100, b2_staticBody);
-	}
+		stage.add(App->physics->CreateChain(0, 0, pinballd, 34, b2_staticBody));
+	
 	return ret;
 }
 

@@ -22,6 +22,8 @@ public:
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 
+	p2List<PhysBody*> stage;
+
 	PhysBody* sensor;
 	bool sensed;
 

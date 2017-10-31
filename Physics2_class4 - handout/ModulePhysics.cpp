@@ -309,13 +309,13 @@ bool ModulePhysics::CleanUp()
 b2RevoluteJoint* ModulePhysics::CreateRotJoint(PhysBody* pbody1, PhysBody* pbody2)
 {
 	b2RevoluteJointDef def;
-	def.Initialize(pbody1->body, pbody2->body, { pbody1->body->GetPosition().x + PIXEL_TO_METERS(-10),pbody1->body->GetPosition().y });
+	def.Initialize(pbody1->body, pbody2->body, { pbody1->body->GetPosition().x ,pbody1->body->GetPosition().y });
 	def.motorSpeed = 0.0f;
 	def.maxMotorTorque = 0.1f;
 	def.enableMotor = true;
 	def.referenceAngle = 0.0f;
 	def.lowerAngle = DEGTORAD * -60.0f;
-	def.upperAngle = DEGTORAD * 30.0f;
+	def.upperAngle = DEGTORAD * 20.0f;
 	def.enableLimit = true;
 	
 	rot_joint[0] = new b2RevoluteJoint(*(b2RevoluteJoint*)world->CreateJoint(&def));
