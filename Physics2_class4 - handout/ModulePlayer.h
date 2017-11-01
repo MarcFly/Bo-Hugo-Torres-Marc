@@ -34,7 +34,9 @@ public:
 public:
 
 	Bouncer	bouncers[4];
-	PhysBody* ball = nullptr;
+	p2List<PhysBody*> ball;
 	int lives = 3;
 	int timer = 0;
+
+	bool lost = false;
 };

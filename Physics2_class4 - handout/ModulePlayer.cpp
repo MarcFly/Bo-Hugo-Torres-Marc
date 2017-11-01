@@ -43,8 +43,8 @@ bool ModulePlayer::Start()
 
 void ModulePlayer::StartBall()
 {
-	ball = App->physics->CreateCircle(350, 600, 10);
-	ball->listener = App->player;
+	ball.add(App->physics->CreateCircle(350, 600, 10));
+	ball.getLast()->data->listener = App->player;
 }
 
 // Unload assets
@@ -94,8 +94,8 @@ update_status ModulePlayer::Update()
 		if(timer < 90)
 			timer++;
 	}
-	else if (timer > 0 && ball->body->GetLinearVelocity().Length() == 0) {
-		ball->body->ApplyLinearImpulse({ 0,-0.05f*(float)timer },ball->body->GetPosition(),true);
+	else if (timer > 0 && ball.getLast()->data->body->GetLinearVelocity().Length() == 0) {
+		ball.getLast()->data->body->ApplyLinearImpulse({ 0,-0.05f*(float)timer },ball.getLast()->data->body->GetPosition(),true);
 		timer = 0;
 	}
 
@@ -104,13 +104,10 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::OnCollision(PhysBody* pb1, PhysBody* pb2) {
-	if (pb2->body->GetFixtureList()->IsSensor()) {
-		ball = App->physics->CreateCircle(350, 600, 10);
-		ball->listener = App->player;
-	}
-
-	if (lives>0)
-		lives--;
+	if (pb2->body->GetFixtureList()->IsSensor())
+		lost = true;
+	else
+		lost = false;
 }
 
 

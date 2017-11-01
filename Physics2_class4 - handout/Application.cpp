@@ -110,6 +110,18 @@ update_status Application::Update()
 		item = item->next;
 	}
 
+	// Cutre code for ball "reset"
+	item = list_modules.findNode(player);
+
+	if (last_lost == true && item->data->App->player->lost == false)
+	{
+		item->data->App->player->StartBall();
+		item->data->App->player->lives--;
+	}
+	last_lost = item->data->App->player->lost;
+
+
+
 	return ret;
 }
 

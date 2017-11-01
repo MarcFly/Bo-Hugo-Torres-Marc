@@ -5,6 +5,7 @@
 #include "ModulePhysics.h"
 #include "p2Point.h"
 #include "math.h"
+#include "ModulePlayer.h"
 
 #ifdef _DEBUG
 #pragma comment( lib, "Box2D/libx86/Debug/Box2D.lib" )
@@ -47,12 +48,18 @@ update_status ModulePhysics::PreUpdate()
 
 	for(b2Contact* c = world->GetContactList(); c; c = c->GetNext())
 	{
+		PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
+		PhysBody* pb2 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
+
 		if(c->GetFixtureA()->IsSensor() && c->IsTouching())
 		{
-			PhysBody* pb1 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
-			PhysBody* pb2 = (PhysBody*)c->GetFixtureA()->GetBody()->GetUserData();
+			
 			if(pb1 && pb2 && pb1->listener)
 				pb1->listener->OnCollision(pb1, pb2);
+			
+		}
+		else if (c->GetFixtureA()->IsSensor() &&  pb1->listener && pb1->listener->App->player->lost == true) {
+			pb1->listener->App->player->lost = false;
 		}
 	}
 
@@ -396,7 +403,7 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
-	if(physA && physA->listener != NULL)
+   	if(physA && physA->listener != NULL)
 		physA->listener->OnCollision(physA, physB);
 
 	if(physB && physB->listener != NULL)

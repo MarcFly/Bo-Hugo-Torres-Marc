@@ -25,6 +25,8 @@ public:
 	ModuleSceneIntro* scene_intro;
 	ModulePhysics* physics;
 
+	bool last_lost;
+
 private:
 
 	p2List<Module*> list_modules;
