@@ -274,12 +274,17 @@ update_status ModuleSceneIntro::Update()
 	{
 		int x, y;
 		c->data->GetPosition(x, y);
+		
 		if (c->data->width == 14)
 		{
+			x -= c->data->width / 3;
+			y -= c->data->height / 3;
 			App->renderer->Blit(red_bumper, x, y, NULL, 1.0f, c->data->GetRotation());
 		}
 		if (c->data->width == 8)
 		{
+			x -= c->data->width / 2;
+			y -= c->data->height / 2;
 			App->renderer->Blit(green_bumper, x, y, NULL, 1.0f, c->data->GetRotation());
 		}
 
