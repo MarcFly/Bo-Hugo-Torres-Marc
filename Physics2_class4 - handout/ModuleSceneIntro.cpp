@@ -32,6 +32,7 @@ bool ModuleSceneIntro::Start()
 	rick = App->textures->Load("pinball/rick_head.png");
 	red_bumper = App->textures->Load("pinball/redbump.png");
 	green_bumper = App->textures->Load("pinball/greenbump.png");
+	flipper = App->textures->Load("pinball/paletas.png");
 
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
@@ -259,36 +260,6 @@ update_status ModuleSceneIntro::Update()
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		if(c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
-			App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
-
-	c = boxes.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
-		
-		c = c->next;
-	}
-
-	c = ricks.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
-
 	c = bumpers.getFirst();
 
 	while (c != NULL)
@@ -307,6 +278,27 @@ update_status ModuleSceneIntro::Update()
 		c = c->next;
 	}
 
+	for (int i = 0; i < 4; i++) {
+		int x, y;
+		App->player->bouncers[i].cpbody->GetPosition(x, y);
+		x -= 56;
+		y -= 56;
+		
+		switch (i) {
+		case 0:
+			App->renderer->Blit(flipper, x, y, NULL, 1.0f, App->player->bouncers[i].flipperpbody->GetRotation() - DEGTORAD * 50, INT_MAX, INT_MAX, false, 0.9f);
+			break;
+		case 1:
+			App->renderer->Blit(flipper, x, y, NULL, 1.0f, App->player->bouncers[i].flipperpbody->GetRotation() + DEGTORAD * 50, INT_MAX, INT_MAX, false, 0.7f);
+			break;
+		case 2:
+			App->renderer->Blit(flipper, x, y, NULL, 1.0f, App->player->bouncers[i].flipperpbody->GetRotation() + DEGTORAD * 50, INT_MAX, INT_MAX, true, 0.7f);
+			break;
+		case 3:
+			App->renderer->Blit(flipper, x, y, NULL, 1.0f, App->player->bouncers[i].flipperpbody->GetRotation() + DEGTORAD * 50, INT_MAX, INT_MAX, true, 0.9f);
+			break;
+		}
+	}
 	
 	return UPDATE_CONTINUE;
 }
