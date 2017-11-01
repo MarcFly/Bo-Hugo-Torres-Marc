@@ -39,64 +39,73 @@ bool ModuleSceneIntro::Start()
 	sensor->listener = App->player;
 	// Create Level collisions
 	
-		int pinball[108] = {
-			220, 659,
-			220, 650,
-			325, 620,
-			325, 584,
-			256, 605,
-			250, 590,
-			324, 567,
-			325, 351,
-			282, 334,
-			323, 208,
-			325, 183,
-			321, 155,
-			311, 127,
-			298, 101,
-			273, 77,
-			255, 63,
-			259, 58,
-			280, 72,
-			300, 92,
-			318, 124,
-			326, 146,
-			330, 170,
-			330, 651,
-			367, 651,
-			367, 171,
-			362, 142,
-			350, 112,
-			334, 83,
-			309, 53,
-			280, 31,
-			244, 14,
-			201, 4,
-			154, 5,
-			109, 20,
-			61, 52,
-			27, 97,
-			8, 147,
-			5, 188,
-			11, 227,
-			69, 403,
-			54, 407,
-			45, 416,
-			40, 430,
-			21, 433,
-			11, 442,
-			5, 453,
-			5, 609,
-			151, 651,
-			151, 659,
-			1, 659,
-			0, 1,
-			371, 0,
-			370, 660,
-			222, 660
-		};
+	int pinball[126] = {
+		221, 660,
+		221, 652,
+		324, 621,
+		324, 585,
+		257, 605,
+		251, 590,
+		324, 567,
+		325, 352,
+		280, 335,
+		323, 204,
+		324, 178,
+		321, 152,
+		312, 125,
+		297, 101,
+		277, 80,
+		256, 64,
+		260, 58,
+		278, 72,
+		296, 88,
+		312, 110,
+		322, 128,
+		328, 145,
+		331, 170,
+		331, 185,
+		331, 574,
+		349, 580,
+		366, 575,
+		365, 168,
+		361, 141,
+		352, 118,
+		340, 93,
+		324, 69,
+		299, 44,
+		268, 25,
+		231, 10,
+		193, 4,
+		152, 7,
+		111, 20,
+		78, 40,
+		51, 65,
+		31, 92,
+		17, 122,
+		9, 153,
+		6, 189,
+		9, 216,
+		13, 232,
+		71, 403,
+		57, 406,
+		48, 412,
+		41, 423,
+		41, 432,
+		30, 432,
+		16, 437,
+		8, 448,
+		6, 459,
+		6, 607,
+		151, 651,
+		151, 660,
+		0, 660,
+		0, 0,
+		371, 0,
+		371, 660,
+		221, 660
+	};
 
-		stage.add(App->physics->CreateChain(0, 0, pinball, 108, b2_staticBody));
+		stage.add(App->physics->CreateChain(0, 0, pinball, 126, b2_staticBody));
 	
 	
 		int pinballa[14] = {
@@ -210,36 +219,36 @@ bool ModuleSceneIntro::Start()
 		};
 
 		bumpers.add(App->physics->CreateChain(0, 0, bumper_right, 6, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		//3 up top
 
 		bumpers.add(App->physics->CreateCircle(185, 55, 8, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		//3 red up ones
 
 		bumpers.add(App->physics->CreateCircle(122, 135, 14, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		bumpers.add(App->physics->CreateCircle(188, 103, 14, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		bumpers.add(App->physics->CreateCircle(255, 135, 14, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		//4 middle ones
 		bumpers.add(App->physics->CreateCircle(190, 205, 8, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		bumpers.add(App->physics->CreateCircle(105, 284, 8, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		bumpers.add(App->physics->CreateCircle(269, 284, 8, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		bumpers.add(App->physics->CreateCircle(190, 360, 8, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 	return ret;
 }

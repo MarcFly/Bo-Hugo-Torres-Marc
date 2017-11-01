@@ -284,7 +284,7 @@ b2RevoluteJoint* ModulePhysics::CreateRotJoint(PhysBody* pbody1, PhysBody* pbody
 	def.maxMotorTorque = 0.1f;
 	def.enableMotor = true;
 	def.referenceAngle = 0.0f;
-	def.lowerAngle = DEGTORAD * -60.0f;
+	def.lowerAngle = DEGTORAD * -40.0f;
 	def.upperAngle = DEGTORAD * 20.0f;
 	def.enableLimit = true;
 	
@@ -308,7 +308,7 @@ b2RevoluteJoint* ModulePhysics::CreateFRotJoint(PhysBody* pbody1, PhysBody* pbod
 	def.enableMotor = true;
 	def.referenceAngle = 0.0f;
 	def.lowerAngle = DEGTORAD * -20.0f;
-	def.upperAngle = DEGTORAD * 60.0f;
+	def.upperAngle = DEGTORAD * 40.0f;
 	def.enableLimit = true;
 
 	rot_joint[0] = new b2RevoluteJoint(*(b2RevoluteJoint*)world->CreateJoint(&def));
