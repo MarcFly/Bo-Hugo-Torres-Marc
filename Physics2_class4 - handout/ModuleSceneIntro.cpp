@@ -198,7 +198,7 @@ bool ModuleSceneIntro::Start()
 		};
 
 		bumpers.add(App->physics->CreateChain(0, 0, bumper_left, 6, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.5);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
 		int bumper_right[6] = {
 			285, 473,
@@ -207,8 +207,41 @@ bool ModuleSceneIntro::Start()
 		};
 
 		bumpers.add(App->physics->CreateChain(0, 0, bumper_right, 6, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.5);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
+		//3 up top
+		bumpers.add(App->physics->CreateCircle(135,60,PIXEL_TO_METERS(6),b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		
+		bumpers.add(App->physics->CreateCircle(178, 55, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+
+		bumpers.add(App->physics->CreateCircle(255, 60, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+
+		//3 red up ones
+
+		bumpers.add(App->physics->CreateCircle(122, 133, PIXEL_TO_METERS(13), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+
+		bumpers.add(App->physics->CreateCircle(188, 100, PIXEL_TO_METERS(13), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+
+		bumpers.add(App->physics->CreateCircle(255, 133, PIXEL_TO_METERS(13), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+
+		//4 middle ones
+		bumpers.add(App->physics->CreateCircle(190, 205, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+
+		bumpers.add(App->physics->CreateCircle(105, 284, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+
+		bumpers.add(App->physics->CreateCircle(269, 284, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+
+		bumpers.add(App->physics->CreateCircle(190, 360, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
 	return ret;
 }
