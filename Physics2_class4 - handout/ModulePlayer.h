@@ -8,7 +8,7 @@ struct Bouncer {
 	PhysBody*	cpbody;
 	PhysBody*	flipperpbody;
 	b2RevoluteJoint* joint;
-	bool		direction = false; //false is left, true is right
+
 
 	Bouncer() {};
 

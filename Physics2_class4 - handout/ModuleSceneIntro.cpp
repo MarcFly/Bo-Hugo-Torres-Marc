@@ -178,6 +178,17 @@ bool ModuleSceneIntro::Start()
 
 		stage.add(App->physics->CreateChain(0, 0, pinballd, 34, b2_staticBody));
 	
+		int pinballe[14] = {
+			81, 475,
+			81, 536,
+			85, 542,
+			91, 546,
+			112, 551,
+			112, 545,
+			83, 475
+		};
+
+		stage.add(App->physics->CreateChain(0, 0, pinballe, 14, b2_staticBody));
 	return ret;
 }
 

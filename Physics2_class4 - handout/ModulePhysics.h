@@ -49,6 +49,7 @@ public:
 
 	void  CreateJoint(PhysBody* pbody);
 	b2RevoluteJoint* CreateRotJoint(PhysBody* pbody1, PhysBody* pbody2);
+	b2RevoluteJoint* CreateFRotJoint(PhysBody* pbody1, PhysBody* pbody2);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

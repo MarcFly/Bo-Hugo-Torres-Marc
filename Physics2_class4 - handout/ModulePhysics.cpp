@@ -318,7 +318,7 @@ b2RevoluteJoint* ModulePhysics::CreateRotJoint(PhysBody* pbody1, PhysBody* pbody
 	def.upperAngle = DEGTORAD * 20.0f;
 	def.enableLimit = true;
 	
-	rot_joint[0] = new b2RevoluteJoint(*(b2RevoluteJoint*)world->CreateJoint(&def));
+	//rot_joint[0] = new b2RevoluteJoint(*(b2RevoluteJoint*)world->CreateJoint(&def));
 
 	//b2RevoluteJoint* item = rot_joint[0];
 
@@ -326,6 +326,29 @@ b2RevoluteJoint* ModulePhysics::CreateRotJoint(PhysBody* pbody1, PhysBody* pbody
 	//rot_joint[0]->SetLimits(DEGTORAD * -45, DEGTORAD * 40);
 	//rot_joint[0]->EnableLimit(true);
 	
+	return (b2RevoluteJoint*)world->CreateJoint(&def);
+}
+
+b2RevoluteJoint* ModulePhysics::CreateFRotJoint(PhysBody* pbody1, PhysBody* pbody2)
+{
+	b2RevoluteJointDef def;
+	def.Initialize(pbody1->body, pbody2->body, { pbody1->body->GetPosition().x ,pbody1->body->GetPosition().y });
+	def.motorSpeed = 0.0f;
+	def.maxMotorTorque = 0.1f;
+	def.enableMotor = true;
+	def.referenceAngle = 0.0f;
+	def.lowerAngle = DEGTORAD * -20.0f;
+	def.upperAngle = DEGTORAD * 60.0f;
+	def.enableLimit = true;
+
+	rot_joint[0] = new b2RevoluteJoint(*(b2RevoluteJoint*)world->CreateJoint(&def));
+
+	//b2RevoluteJoint* item = rot_joint[0];
+
+
+	//rot_joint[0]->SetLimits(DEGTORAD * -45, DEGTORAD * 40);
+	//rot_joint[0]->EnableLimit(true);
+
 	return rot_joint[0];
 }
 
