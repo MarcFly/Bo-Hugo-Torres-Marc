@@ -24,11 +24,17 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	void StartBall();
+
+	void OnCollision(PhysBody* pb1, PhysBody* pb2);
+
 	//void MoveLeft();
 	//void MoveRight();
 
 public:
 
 	Bouncer	bouncers[4];
-
+	PhysBody* ball = nullptr;
+	int lives = 3;
+	int timer = 0;
 };

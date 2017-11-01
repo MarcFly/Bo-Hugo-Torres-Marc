@@ -250,46 +250,9 @@ update_status ModulePhysics::PostUpdate()
 			}
 
 			
-			// TODO 1: If mouse button 1 is pressed ...
-			if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
-			{
-				PhysBody* test = (PhysBody*)b->GetUserData();
-				b2Vec2 p = { PIXEL_TO_METERS(App->input->GetMouseX()), PIXEL_TO_METERS(App->input->GetMouseY()) };
-				if (f->GetShape()->TestPoint(f->GetBody()->GetTransform(), p) == true)
-				{
-					CreateJoint(test);
-				}
-				
-			}
-
-			
-			// test if the current body contains mouse position
 		}
 	}
 
-	// If a body was selected we will attach a mouse joint to it
-	// so we can pull it around
-	// TODO 2: If a body was selected, create a mouse joint
-	// using mouse_joint class property
-
-
-	// TODO 3: If the player keeps pressing the mouse button, update
-	// target position and draw a red line between both anchor points
-	
-	if ((App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT || App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) && mouse_joint != nullptr)
-	{
-		mouse_joint->SetTarget({ PIXEL_TO_METERS(App->input->GetMouseX()), PIXEL_TO_METERS(App->input->GetMouseY()) });
-		App->renderer->DrawLine(METERS_TO_PIXELS(mouse_joint->GetAnchorA().x), METERS_TO_PIXELS(mouse_joint->GetAnchorA().y), METERS_TO_PIXELS(mouse_joint->GetAnchorB().x), METERS_TO_PIXELS(mouse_joint->GetAnchorB().y), 255, 0, 255);
-	}
-	else if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP && mouse_joint != nullptr) {
-		world->DestroyJoint(mouse_joint);
-		mouse_joint = nullptr;
-	}
-
-	// TODO 4: If the player releases the mouse button, destroy the joint
-
-
-	//LOG("%f", rot_joint[0]->GetMotorSpeed());
 	
 	return UPDATE_CONTINUE;
 }
