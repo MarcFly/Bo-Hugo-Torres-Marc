@@ -10,7 +10,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle = box = rick =NULL;
+	circle = box = rick = red_bumper = green_bumper = NULL;
 	ray_on = false;
 	sensed = false;
 }
@@ -30,6 +30,9 @@ bool ModuleSceneIntro::Start()
 	circle = App->textures->Load("pinball/wheel.png");
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
+	red_bumper = App->textures->Load("pinball/redbump.png");
+	green_bumper = App->textures->Load("pinball/greenbump.png");
+
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT+50, SCREEN_WIDTH, 40);
@@ -210,37 +213,32 @@ bool ModuleSceneIntro::Start()
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
 		//3 up top
-		bumpers.add(App->physics->CreateCircle(135,60,PIXEL_TO_METERS(6),b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
-		
-		bumpers.add(App->physics->CreateCircle(178, 55, PIXEL_TO_METERS(6), b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
-		bumpers.add(App->physics->CreateCircle(255, 60, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(185, 55, 8, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
 		//3 red up ones
 
-		bumpers.add(App->physics->CreateCircle(122, 133, PIXEL_TO_METERS(13), b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(122, 135, 14, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
-		bumpers.add(App->physics->CreateCircle(188, 100, PIXEL_TO_METERS(13), b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(188, 103, 14, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
-		bumpers.add(App->physics->CreateCircle(255, 133, PIXEL_TO_METERS(13), b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(255, 135, 14, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
 		//4 middle ones
-		bumpers.add(App->physics->CreateCircle(190, 205, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(190, 205, 8, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
-		bumpers.add(App->physics->CreateCircle(105, 284, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(105, 284, 8, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
-		bumpers.add(App->physics->CreateCircle(269, 284, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(269, 284, 8, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
-		bumpers.add(App->physics->CreateCircle(190, 360, PIXEL_TO_METERS(6), b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(190, 360, 8, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
 
 	return ret;
@@ -291,6 +289,25 @@ update_status ModuleSceneIntro::Update()
 		c = c->next;
 	}
 
+	c = bumpers.getFirst();
+
+	while (c != NULL)
+	{
+		int x, y;
+		c->data->GetPosition(x, y);
+		if (c->data->width == 14)
+		{
+			App->renderer->Blit(red_bumper, x, y, NULL, 1.0f, c->data->GetRotation());
+		}
+		if (c->data->width == 8)
+		{
+			App->renderer->Blit(green_bumper, x, y, NULL, 1.0f, c->data->GetRotation());
+		}
+
+		c = c->next;
+	}
+
+	
 	return UPDATE_CONTINUE;
 }
 

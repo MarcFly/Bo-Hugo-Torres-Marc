@@ -31,6 +31,8 @@ public:
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
+	SDL_Texture* red_bumper;
+	SDL_Texture* green_bumper;
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
