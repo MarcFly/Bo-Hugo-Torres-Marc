@@ -117,6 +117,13 @@ update_status Application::Update()
 	{
 		item->data->App->player->StartBall();
 		item->data->App->player->lives--;
+		if (item->data->App->player->lives < 0) {
+			if (item->data->App->player->score >= item->data->App->player->high_score)
+				item->data->App->player->high_score = item->data->App->player->score;
+			item->data->App->player->score = 0;
+			item->data->App->player->lives = 3;
+			
+		}
 	}
 	last_lost = item->data->App->player->lost;
 

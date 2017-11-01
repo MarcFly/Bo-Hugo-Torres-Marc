@@ -35,8 +35,13 @@ public:
 
 	Bouncer	bouncers[4];
 	p2List<PhysBody*> ball;
+
+
 	int lives = 3;
 	int timer = 0;
 
 	bool lost = false;
+
+	int score = 0;
+	int high_score = 0;
 };

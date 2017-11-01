@@ -21,7 +21,7 @@ ModulePhysics::ModulePhysics(Application* app, bool start_enabled) : Module(app,
 	rot_joint[1] = NULL;
 	rot_joint[2] = NULL;
 	rot_joint[3] = NULL;
-	debug = true;
+	debug = false;
 }
 
 // Destructor

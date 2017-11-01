@@ -10,7 +10,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle = box = rick = red_bumper = green_bumper = NULL;
+	red_bumper = green_bumper = NULL;
 	ray_on = false;
 	sensed = false;
 }
@@ -27,12 +27,11 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	// Load Assets requirede for "map"
-	circle = App->textures->Load("pinball/wheel.png");
-	box = App->textures->Load("pinball/crate.png");
-	rick = App->textures->Load("pinball/rick_head.png");
+	background = App->textures->Load("pinball/background.png");
 	red_bumper = App->textures->Load("pinball/redbump.png");
 	green_bumper = App->textures->Load("pinball/greenbump.png");
 	flipper = App->textures->Load("pinball/paletas.png");
+	pinball = App->textures->Load("pinball/ball.png");
 
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
@@ -258,9 +257,9 @@ update_status ModuleSceneIntro::Update()
 {
 	
 	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>* c = circles.getFirst();
+	App->renderer->Blit(background, 0, 0, NULL, 1.0f);
 
-	c = bumpers.getFirst();
+	p2List_item<PhysBody*>* c = bumpers.getFirst();
 
 	while (c != NULL)
 	{
@@ -300,25 +299,13 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 	
+	int x, y;
+	App->player->ball.getLast()->data->GetPosition(x,y);
+	App->renderer->Blit(pinball, x, y, NULL, 1.0f, App->player->ball.getLast()->data->GetRotation());
+
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
-
-	App->audio->PlayFx(bonus_fx);
-
-	/*
-	if(bodyA)
-	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}
-
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}*/
 }
