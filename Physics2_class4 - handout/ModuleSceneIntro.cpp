@@ -191,23 +191,23 @@ bool ModuleSceneIntro::Start()
 
 		stage.add(App->physics->CreateChain(0, 0, pinballe, 14, b2_staticBody));
 
-		int bumper_left[4] = {
+		int bumper_left[6] = {
 			86, 475,
-			117, 544
+			117, 544,
+			116, 544
 		};
-		p2List_item<PhysBody*>* item_1 = bumpers.add(App->physics->CreateChain(0, 0, bumper_left, 4, b2_staticBody));
-		b2Fixture* fix = item_1->data->body->GetFixtureList();
-		item_1->data->body->SetTransform(b2Vec2(0, 0), 45);
-		fix->SetRestitution(0.5);
 
-		int bumper_right[4] = {
+		bumpers.add(App->physics->CreateChain(0, 0, bumper_left, 6, b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.5);
+
+		int bumper_right[6] = {
 			285, 473,
-			253, 547
+			253, 547,
+			254, 547
 		};
-		p2List_item<PhysBody*>* item_2 = bumpers.add(App->physics->CreateChain(0, 0, bumper_right, 4, b2_staticBody));
-		b2Fixture* fix = item_2->data->body->GetFixtureList();
-		item_2->data->body->SetTransform(b2Vec2(0, 0), 45);
-		fix->SetRestitution(0.5);
+
+		bumpers.add(App->physics->CreateChain(0, 0, bumper_right, 6, b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.5);
 
 
 	return ret;
