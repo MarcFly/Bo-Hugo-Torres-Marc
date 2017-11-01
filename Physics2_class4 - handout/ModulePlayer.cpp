@@ -46,6 +46,7 @@ bool ModulePlayer::Start()
 void ModulePlayer::StartBall()
 {
 	ball.add(App->physics->CreateCircle(350, 570, 10));
+	ball.getLast()->data->body->SetBullet(true);
 	ball.getLast()->data->listener = App->player;
 }
 
