@@ -6,6 +6,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleWindow.h"
 #include "p2SString.h"
+#include "ModuleAudio.h"
 #include <math.h>
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -21,7 +22,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	//Load assets required for player (palancas tt)
 
-
+	sound_1 = App->audio->LoadFx("sound_bounce.wav");
+	rocket_sound = App->audio->LoadFx("rocketfx.wav");
 	//Create desired objects
 	bouncers[0].cpbody = App->physics-> App->physics->CreateCircle(126, 597, 0.01f, b2_kinematicBody);
 	bouncers[0].flipperpbody = App->physics->CreateRectangle(149, 597, 46, 10,b2_dynamicBody);
@@ -31,8 +33,8 @@ bool ModulePlayer::Start()
 	bouncers[1].flipperpbody = App->physics->CreateRectangle(127, 394, 34, 10, b2_dynamicBody);
 	bouncers[1].joint = App->physics->CreateRotJoint(bouncers[1].cpbody, bouncers[1].flipperpbody);
 
-	bouncers[2].cpbody = App->physics->App->physics->CreateCircle(278, 338, 0.01f, b2_kinematicBody);
-	bouncers[2].flipperpbody = App->physics->CreateRectangle(261, 338, 34, 10, b2_dynamicBody);
+	bouncers[2].cpbody = App->physics->App->physics->CreateCircle(275, 218, 0.01f, b2_kinematicBody);
+	bouncers[2].flipperpbody = App->physics->CreateRectangle(258, 218, 34, 10, b2_dynamicBody);
 	bouncers[2].joint = App->physics->CreateFRotJoint(bouncers[2].cpbody, bouncers[2].flipperpbody);
 
 	bouncers[3].cpbody = App->physics->App->physics->CreateCircle(246, 597, 0.01f, b2_kinematicBody);
@@ -100,6 +102,7 @@ update_status ModulePlayer::Update()
 	else if (timer > 0 && ball.getLast()->data->body->GetLinearVelocity().Length() == 0) {
 		ball.getLast()->data->body->ApplyLinearImpulse({ 0,-0.05f*(30 + (float)timer) },ball.getLast()->data->body->GetPosition(),true);
 		timer = 0;
+		App->audio->PlayFx(rocket_sound);
 	}
 
 	p2SString title;
@@ -117,6 +120,7 @@ void ModulePlayer::OnCollision(PhysBody* pb1, PhysBody* pb2) {
 
 	if (pb2->body->GetFixtureList()->GetShape()->GetType() == pb2->body->GetFixtureList()->GetShape()->e_circle)
 		score += 50;
+		App->audio->PlayFx(sound_1);
 }
 
 

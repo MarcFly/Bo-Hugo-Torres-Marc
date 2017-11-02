@@ -36,6 +36,8 @@ public:
 	Bouncer	bouncers[4];
 	p2List<PhysBody*> ball;
 
+	uint sound_1;
+	uint rocket_sound;
 
 	int lives = 3;
 	int timer = 0;

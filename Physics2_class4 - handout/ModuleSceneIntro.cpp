@@ -32,8 +32,7 @@ bool ModuleSceneIntro::Start()
 	green_bumper = App->textures->Load("pinball/greenbump.png");
 	flipper = App->textures->Load("pinball/paletas.png");
 	pinball = App->textures->Load("pinball/ball.png");
-
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	App->audio->PlayMusic("music.wav");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT+50, SCREEN_WIDTH, 40);
 	sensor->listener = App->player;
@@ -102,7 +101,7 @@ bool ModuleSceneIntro::Start()
 		0, 0,
 		371, 0,
 		371, 660,
-		221, 660
+		221, 661
 	};
 
 		stage.add(App->physics->CreateChain(0, 0, pinball, 126, b2_staticBody));
@@ -204,18 +203,18 @@ bool ModuleSceneIntro::Start()
 		stage.add(App->physics->CreateChain(0, 0, pinballe, 14, b2_staticBody));
 
 		int bumper_left[6] = {
-			86, 475,
-			117, 544,
+			84, 475,
+			117, 547,
 			116, 544
 		};
 
 		bumpers.add(App->physics->CreateChain(0, 0, bumper_left, 6, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(0.3);
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		int bumper_right[6] = {
-			285, 473,
-			253, 547,
-			254, 547
+			290, 473,
+			258, 547,
+			259, 547
 		};
 
 		bumpers.add(App->physics->CreateChain(0, 0, bumper_right, 6, b2_staticBody));
@@ -223,32 +222,30 @@ bool ModuleSceneIntro::Start()
 
 		//3 up top
 
-		bumpers.add(App->physics->CreateCircle(185, 55, 8, b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(185, 55, 9, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 		//3 red up ones
 
-		bumpers.add(App->physics->CreateCircle(122, 135, 14, b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(122, 135, 15, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
-		bumpers.add(App->physics->CreateCircle(188, 103, 14, b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(188, 103, 15, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
-		bumpers.add(App->physics->CreateCircle(255, 135, 14, b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(255, 135, 15, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
-		//4 middle ones
-		bumpers.add(App->physics->CreateCircle(190, 205, 8, b2_staticBody));
+		//2 middle ones
+		bumpers.add(App->physics->CreateCircle(190, 205, 9, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
-		bumpers.add(App->physics->CreateCircle(105, 284, 8, b2_staticBody));
+		bumpers.add(App->physics->CreateCircle(105, 284, 9, b2_staticBody));
 		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
-		bumpers.add(App->physics->CreateCircle(269, 284, 8, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
+		bumpers.add(App->physics->CreateCircle(252, 284, 9, b2_staticBody));
+		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.5f);
 
-		bumpers.add(App->physics->CreateCircle(190, 360, 8, b2_staticBody));
-		bumpers.getLast()->data->body->GetFixtureList()->SetRestitution(1.1f);
 
 	return ret;
 }
@@ -275,13 +272,13 @@ update_status ModuleSceneIntro::Update()
 		int x, y;
 		c->data->GetPosition(x, y);
 		
-		if (c->data->width == 14)
+		if (c->data->width == 15)
 		{
 			x -= c->data->width / 3;
 			y -= c->data->height / 3;
-			App->renderer->Blit(red_bumper, x, y, NULL, 1.0f, c->data->GetRotation());
+			App->renderer->Blit(red_bumper, x+3, y+3, NULL, 1.0f, c->data->GetRotation());
 		}
-		if (c->data->width == 8)
+		if (c->data->width == 9)
 		{
 			x -= c->data->width / 2;
 			y -= c->data->height / 2;
