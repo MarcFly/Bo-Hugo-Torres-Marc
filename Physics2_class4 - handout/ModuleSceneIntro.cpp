@@ -32,7 +32,7 @@ bool ModuleSceneIntro::Start()
 	green_bumper = App->textures->Load("pinball/greenbump.png");
 	flipper = App->textures->Load("pinball/paletas.png");
 	pinball = App->textures->Load("pinball/ball.png");
-	App->audio->PlayMusic("music.wav");
+	App->audio->PlayMusic("pinball/music.wav");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT+50, SCREEN_WIDTH, 40);
 	sensor->listener = App->player;

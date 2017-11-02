@@ -22,8 +22,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	//Load assets required for player (palancas tt)
 
-	sound_1 = App->audio->LoadFx("sound_bounce.wav");
-	rocket_sound = App->audio->LoadFx("rocketfx.wav");
+	sound_1 = App->audio->LoadFx("pinball/sound_bounce.wav");
+	rocket_sound = App->audio->LoadFx("pinball/rocketfx.wav");
 	//Create desired objects
 	bouncers[0].cpbody = App->physics-> App->physics->CreateCircle(126, 597, 0.01f, b2_kinematicBody);
 	bouncers[0].flipperpbody = App->physics->CreateRectangle(149, 597, 46, 10,b2_dynamicBody);
@@ -119,8 +119,10 @@ void ModulePlayer::OnCollision(PhysBody* pb1, PhysBody* pb2) {
 		lost = false;
 
 	if (pb2->body->GetFixtureList()->GetShape()->GetType() == pb2->body->GetFixtureList()->GetShape()->e_circle)
+	{
 		score += 50;
 		App->audio->PlayFx(sound_1);
+	}
 }
 
 
